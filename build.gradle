@@ -20,7 +20,7 @@ tasks.withType(JavaCompile) {
 }
 
 repositories {
-	mavenCentral()
+	jcenter()
 }
 
 apply plugin: 'maven'
