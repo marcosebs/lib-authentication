@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-	id 'java'
+	id 'java-library'
 }
 
 group = 'br.com'
@@ -25,22 +25,10 @@ repositories {
 
 apply plugin: 'maven'
 
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-}
-
-task myJar(type: Jar)
-
-artifacts {
-	archives myJar
-}
-
-test {
-	useJUnitPlatform()
 }
