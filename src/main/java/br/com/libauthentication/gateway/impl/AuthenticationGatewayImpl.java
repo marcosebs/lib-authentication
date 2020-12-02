@@ -4,20 +4,30 @@ import br.com.libauthentication.dto.request.UserLogin;
 import br.com.libauthentication.dto.request.UserRegister;
 import br.com.libauthentication.dto.response.Token;
 import br.com.libauthentication.gateway.AuthenticationGateway;
+import br.com.libauthentication.service.AuthenticationService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class AuthenticationGatewayImpl implements AuthenticationGateway {
 
     private final RestTemplate restTemplate;
+
+    public AuthenticationGatewayImpl(RestTemplate restTemplate) {
+        restTemplate = new RestTemplate();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(new ObjectMapper());
+        restTemplate.getMessageConverters().add(converter);
+        this.restTemplate = restTemplate;
+    }
 
     @Override
     public Boolean register(String url, UserRegister request) {

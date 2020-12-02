@@ -35,6 +35,12 @@ dependencies {
 	}
 }
 
+task myJar(type: Jar)
+
+artifacts {
+	archives myJar
+}
+
 test {
 	useJUnitPlatform()
 }
